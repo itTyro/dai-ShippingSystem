@@ -1,0 +1,118 @@
+// 弹性布局
+@mixin flex($direction: row, $justify: flex-start, $align: stretch) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// 文本溢出省略
+@mixin text-ellipsis($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// 清除浮动
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+// 响应式断点
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'xs' {
+    @media (max-width: 576px) { @content; }
+  } @else if $breakpoint == 'sm' {
+    @media (min-width: 577px) and (max-width: 768px) { @content; }
+  } @else if $breakpoint == 'md' {
+    @media (min-width: 769px) and (max-width: 992px) { @content; }
+  } @else if $breakpoint == 'lg' {
+    @media (min-width: 993px) and (max-width: 1200px) { @content; }
+  } @else if $breakpoint == 'xl' {
+    @media (min-width: 1201px) { @content; }
+  }
+}
+
+// 阴影效果
+@mixin box-shadow($level: 'base') {
+  @if $level == 'base' {
+    box-shadow: $box-shadow-base;
+  } @else if $level == 'light' {
+    box-shadow: $box-shadow-light;
+  } @else if $level == 'dark' {
+    box-shadow: $box-shadow-dark;
+  }
+}
+
+// 过渡动画
+@mixin transition($properties: all) {
+  transition: $properties $transition-duration $transition-timing-function;
+}
+
+// 按钮样式
+@mixin button-style($type: 'primary') {
+  @if $type == 'primary' {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    color: #fff;
+  } @else if $type == 'success' {
+    background-color: $success-color;
+    border-color: $success-color;
+    color: #fff;
+  } @else if $type == 'warning' {
+    background-color: $warning-color;
+    border-color: $warning-color;
+    color: #fff;
+  } @else if $type == 'danger' {
+    background-color: $danger-color;
+    border-color: $danger-color;
+    color: #fff;
+  }
+  
+  &:hover {
+    opacity: 0.9;
+  }
+  
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+// 卡片样式
+@mixin card-style {
+  background-color: #fff;
+  border-radius: $border-radius-base;
+  @include box-shadow('light');
+  padding: $spacing-large;
+}
+
+// 表单样式
+@mixin form-style {
+  .el-form-item {
+    margin-bottom: $spacing-large;
+    
+    &__label {
+      font-weight: 500;
+      color: $text-color-primary;
+    }
+    
+    &__content {
+      .el-input,
+      .el-select,
+      .el-date-picker {
+        width: 100%;
+      }
+    }
+  }
+} 
